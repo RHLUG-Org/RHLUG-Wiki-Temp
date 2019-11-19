@@ -1,0 +1,50 @@
+Sometimes you will need to access DFS (Distributed File System) to install software or upload files to a class's "dropbox".
+
+You can connect to Rose-Hulman DFS through sftp or samba (smb). Both methods are listed in case one would stop working, or one is more reliable than the other.
+
+To access the Rose-Hulman DFS, you will need to be on campus. If you are off campus, you will need to use the '''Pulse Secure VPN via OpenConnect'''. Please see that page (Pulse Secure VPN.mediawiki) for more details.
+
+= SFTP =
+We will be using the "sftp" utility to download from the dfs server. This is a command line utility.
+
+Type the following command into a terminal and press enter. Substitute ROSE-USERNAME with your username.
+
+<code>sftp -o "HostKeyAlgorithms ssh-dss" ROSE-USERNAME@dfs.rose-hulman.edu </code>
+
+= Samba =
+
+You will need to have <code>smbclient</code> installed in your repo's packages.
+
+== Through the terminal ==
+Open a terminal and type:
+
+<code>/usr/bin/smbclient //rose-hulman.edu/DFS -U [Your RHIT network user name]@rose-hulman.edu</code> ('''you must type in your full email here'''!)
+
+Note the '''forward slashes''' instead of the backslashes. In the terminal, the backslash (\) is an escape character. To type one backslash (which you can also do), type \\. To type two, type \\\\.
+
+Also, we are typing /usr/bin/smbclient to avoid possible mistakes due to backslashes.
+
+If you get a message saying <code>/usr/bin/smbclient: Can't load /etc/samba/smb.conf - run testparm to debug it</code>, run <code>sudo touch /etc/samba/smb.conf</code> in a terminal to create an empty SMB configuration. Usually this is not needed, but sometimes smbclient is finicky.
+
+If this doesn't let you type in your password, there may be an issue with a connection method not reaching their servers. Try an [[#No_password_prompt_comes_up|alternate connection method]].
+
+Then type in your password and press ENTER.
+
+Once you're connected, you can type help and get a list of commands to use.
+
+Source: [https://help.ubuntu.com/community/Samba/SambaClientGuide#Samba_Client_-_Manual_Configuration Ubuntu Samba Client Guide]
+
+= Troubleshooting =
+Make sure you are on the [https://github.com/samba-team/samba/releases latest stable version of smbclient] (install updates) first. (In the link, don't look for rc releases, just the samba-... ones)
+
+== No password prompt comes up ==
+Try typing in:
+
+* <code>/usr/bin/smbclient //rose-hulman.edu/DFS -U ROSE-HULMAN\\[Your RHIT network user name]</code> (or ROSE-HULMAN/[Your RHIT network user name])
+
+This is because ROSE-HULMAN is the "domain" on Windows computers that connects to the internal network.
+
+= See also =
+In case you have any issues, please refer to the following pages. This tutorial may be updated depending on user demand.
+
+[https://wiki.archlinux.org/index.php/samba SMB - ArchWiki] (relevant sections: 2, 2.5 for specific desktop environment integration e.g. Gnome/KDE/XFCE)
