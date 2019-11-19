@@ -1,0 +1,77 @@
+Thunderbird is a productivity application developed by Mozilla that allows you to view your email, check your calendar and task lists, etc.
+
+An alternative to Thunderbird is [https://wiki.gnome.org/Apps/Evolution/ Evolution] which is developed by Gnome.
+
+== Email ==
+=== Setup with Rose-Hulman Exchange Email Server ===
+Official instructions are found [https://servicedesk.rose-hulman.edu/knowledgebase/article/KA-01175/en-us on EIT's website].
+
+This page is useful because it walsk you through the process. You can apply a similar setup to any other IMAP email client (e.g. Evolution on Linux, K-9 Mail on Android, FairEmail on Android, etc.)
+
+So here is what you need to do to connect:
+
+Go to File > New > Existing Mail Account... in Thunderbird.
+
+In "Your Name", enter your real name or Rose username. This will show up in the "To: " field when you have sent messages to other people.
+
+Under "Email address": enter "[yourrosehulmanusername]@rose-hulman.edu", replacing '''[yourrosehulmanusername]''' with your username used at Rose-Hulman (which contains your last name and first name and usually middle initial).
+
+Under "Password": enter your Rose-Hulman '''network''' password. This means whatever you log into Moodle, Banner Web, or My Rose-Hulman with, and applies generally to most Rose services.
+
+You can click on "Remember password" so you won't need to reenter your password. But be careful, because if you give someone physical access to your computer, they can see your Rose password! (It is stored in plain text in Thunderbird's database, see [https://support.mozilla.org/en-US/questions/1061706 here for a description of the problem] and [https://support.mozilla.org/en-US/kb/protect-your-thunderbird-passwords-master-password here for a solution which will require a separate password to fetch new mail from your email accounts in Thunderbird]. This is still present as of Firefox 52.x versions.)
+
+Now click "Continue". Immediately click "Manual config". Thunderbird will not be able to look up the mail server properly or enter the correct authentication settings so a manual configuration is required.
+
+Enter the following settings into each of the boxes. Important settings to note are bolded:
+
+{| class="wikitable"
+|+Manual config - Mail Account Setup
+|-
+| 
+| 
+|Server hostname
+|Port
+|SSL
+|Authentication
+|-
+|'''Incoming:'''
+|IMAP
+|outlook.office365.com
+|'''993'''
+|'''SSL/TLS'''
+|'''Normal password'''
+|-
+|'''Outgoing:'''
+|SMTP
+|smtp.office365.com
+|'''587'''
+|'''STARTTLS'''
+|'''Normal password'''
+|}
+
+Leave username (incoming/outgoing) the same. Now click '''"Done"''' (NOT Re-test, because that will auto-detect incorrect settings).
+
+If another message dialog pops up for credentials, enter your Rose-Hulman network password and username (networkusername@rose-hulman.edu) into the box. You can allow Thunderbird to save the password like last time.
+
+If you clicked "Re-test" and not "Done" and then your settings don't work (e.g. Thunderbird then would try to switch to Kererbros instead of NTLM after checking settings, "The following settings were found by probing the given server" -- there is an error with Thunderbird's recognition of settings), you will need to reconfigure these fields because Thunderbird automatically tries multiple connection types. If you get "Thunderbird failed to find the settings for your email account" error, you will need to recheck what you entered in the fields/boxes, then click "Done" again to test the connection (NOT Re-test).
+
+Now you are all set up to read your email from Rose.
+
+== Calendars and Tasks Setup ==
+
+Reminders will be automatically sent out depending on what reminders you have set for a specific event.
+
+To disable event reminder sounds (a dialog with reminder will still pop up), go to the Edit menu > Preferences. Then go to the "Calendars" tab and click on the "Reminders" sub-category tab. Uncheck the "Play a sound" box, then click on Close on the bottom right. (Your settings in this window are automatically applied.)
+
+If you want the today view (on the right hand side) and it disappeared (or you want to remove it from your view), click on "View" menu > Today Pane > Show Today Pane, or press the keyboard shortcut F11 (or whatever else was there) while in the Thunderbird window. Source: [https://support.mozilla.org/en-US/questions/1086718 Link to a Mozilla forum post about this issue]
+
+=== Setup with Rose-Hulman Exchange Server ===
+To be written up.
+
+=== Setup with Google Calendar for Calendars and Tasks ===
+To be written up.
+
+=== Setup with Nextcloud/WebDAV Server (Radicale, SoGo, etc.) for Calendars and Tasks ===
+To be written up.
+
+For now, use this [https://docs.nextcloud.com/server/13/user_manual/pim/sync_thunderbird.html documentation for Nextcloud at this link]. This process can be applied in a similar way to any WebDAV server.
