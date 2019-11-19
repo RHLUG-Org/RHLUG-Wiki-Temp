@@ -1,0 +1,114 @@
+Software Alternatives
+
+This page contains lists of software that are replacements or alternatives to
+proprietary counterparts or are only available on other platforms (Windows, Mac).
+
+== CAS (Computer Algebra System) ==
+FOSS alternatives to Mathematica and Maple (without an equation editor):
+Maxima (http://maxima.sourceforge.net/)
+SageMath (https://www.sagemath.org/)
+
+== Note Taking ==
+=== GUI-based ===
+These are more alternatives of Onenote/Evernote since they have a GUI:
+* Xournalpp (https://github.com/xournalpp/xournalpp) (rewrite of Xournal in C++. Very active, but not quite there yet in terms of features to OneNote) siliconninja personally recommends this one the most and uses it the most often.
+* μPad (https://github.com/MicroPad/Web) (basically a clone of Onenote's note organization, but with no drawing color (yet). EDIT 2/27/19: rich text was added! Thanks to the μPad developers! Paid sync service - probably can self-host, or just use the webapp offline and sync note data with your own cloud storage.) siliconninja personally recommends this one.
+* CherryTree (https://github.com/giuspen/cherrytree) (has hierarchy, like a binder. A major GTK3 rewrite is in progress.)
+* Trilium (https://github.com/zadam/trilium) (Very active project. has a different type of way to organize your notes. Need your own server to sync. Uses the Electron library - you might not like this.) siliconninja sort of recommends this one - the GUI functionality (bold text, etc) is really hidden, but the note organization features such as relation maps and JavaScript scripting are neat and something worth your consideration.
+* Joplin (https://github.com/laurent22/joplin) (Sort of active project. Markdown, desktop application annoying to use because of no WYSIWYG capabilities (yet). Syncs with Nextcloud/Owncloud/WebDAV servers. Has mobile applications (yay!) Uses the Electron library - you might not like this.)
+* Bakoma-TeX (http://bakoma-tex.com/) (If you like LaTeX for note-taking, this includes a WYSIWYG editor. Probably no WYSIWYG drawing capabilities. Handwritten math only on Windows because it uses its math writing input thingy. Has Linux version. Bakoma-TeX is somewhat expensive.)
+* LyX (https://www.lyx.org/) (If you like LaTeX for note-taking, this includes aWYSIWYM editor, which is not exactly WYSIWYG. siliconninja personally noticed that its line spacing functionality doesn't always work well and you might need to change the LaTeX "preamble" by hand for all files to solve this issue.)
+* Turtl (https://github.com/turtl) (Recently had a big update. More like sticky notes with limited text input capabilities. Has mobile applications (yay!) Uses the Electron library - you might not like this.)
+* Xournal (http://xournal.sourceforge.net/) (for handwriting/text anywhere on page) (Old, no longer being maintained (probably))
+
+=== CLI/Text based ===
+
+These are text file editors, and certain functionality such as to-do lists/reminders
+can be added to them.
+
+* Nextcloud Notes (https://apps.nextcloud.com/apps/notes) - Install this on a
+Owncloud/Nextcloud server. Edit text files through the Owncloud/Nextcloud
+webapp or through Owncloud/Nextcloud file syncing on the desktop.
+* Emacs Orgmode (https://orgmode.org/)
+* Spacemacs (https://github.com/syl20bnr/spacemacs) - Used by some RHIT CS students in upper-level courses with less note-taking.
+* Vim (https://www.vim.org/)
+
+== Graphics Editing ==
+
+* GIMP (https://gimp.org/) - also called "The GIMP", this is the most Photoshop like alternative in terms of functionality (and has some unique ones of its own - an open-source exclusive (in some ways)!).
+* Krita (https://krita.org/en/) - primarily designed as a painting tool, not a graphics editing tool. Text functionality is weird as of 3.0/4.0. The UI/UX is slightly more bugged in some areas such as resizing/transforming text/images (IMO) than GIMP. I've used this sometimes when I don't need to use GIMP for a lot.
+
+=== Notes on how to use GIMP ===
+
+Play with it for a few (5-6 or so) hours and I think you'll understand/like it
+because it's very different and extensible in its own way. A neat opinion
+article on why to learn any graphics editor (https://blog.codinghorror.com
+/programming-tip-learn-a-graphics-editor/) I've found that GIMP can do some
+really neat things that would be hard to do with PS.
+
+2.10.8: There are some bugs like icons (like "make layer visible" (eyeball icon)) not appearing or text
+for layers not showing up. Resize the left/right panels to fix this.
+"And I will add this one warning: although GIMP is both free and powerful, the
+interface is so excruciatingly difficult to use that by the time you become
+proficient, you'll be able to handle any graphics editor on the market with ease."
+Remember that layers have a fixed size and the general behavior of it is that
+more things have to be "defined" first in GIMP.
+
+Useful Things: Move tool>Move the active layer. Fill tool>fill whole
+selection/fill similar colors - whole selection can be useful, you can say what
+you want it to do for a particular selection. Use the select color and fuzzy
+select (acts like "magic wand" in Photoshop) tool. Use the arrange tool for
+arranging multiple items. Press ENTER when done using the scale or rotate,
+etc tools, or click something else to confirm. Also, you can preview your
+gradient while making it! And there are all sorts of cool brushes and effects
+for them you can use!
+
+The text tool works well, it doesn't have the same "warping" UX like PS
+does, but you can have "text paths" (tutorial on YT (https://www.youtube.com
+/watch?time_continue=36&v=6nHyKrJwsaE)).
+
+USE LAYER GROUPS. You'll need them since you can't select multiple layers
+at once. Also the color picker (as of 2.10.8) is weird, just select the layer with
+that color and pick the color from that INSIDE the *MAIN* GIMP window.
+USE HARDWARE ACCELERATION. Edit>Preferences>Hardware
+Acceleration>Tick "Use OpenCL". It makes things a lot faster, especially with
+a GPU.
+
+If you haven't played with Photoshop at all, the learning curve is pretty steep - try something like Krita first. It has greatly improved since the 2.8 days.
+
+Plugins such as G'MIC (can install through package manager or manually)
+(https://www.makeuseof.com/tag/install-gimp-plugins/) and the many
+filters/"script-fu" scripts can help. Ex: "Drop Shadow..." can be done under
+Filters>Light and Shadow. Deleting things to have a transparent background
+as part of the layer - tutorial here (https://logosbynick.com/gimp-delete-
+background-to-transparent/) - click Layer>Transparency>Add Alpha Channel
+and then select something/delete it.
+
+Drawing built-in geometric shapes (circle, square, etc) can be done using
+either G'MIC (creates a weird type of concentric circles), as of G'MIC in
+2/27/19 you need to go to Testing>Samj>Arrays & Tiles to find this
+(https://www.youtube.com/watch?v=3W1vutySBC4), the Gfig plugin under
+Filters>Render>Gfig (http://gimpforums.com/thread-i-need-a-plugin-to-draw-
+squares-and-circles-on-gimp) (NOTE: you can't resize the preview of the
+image this way), or through selections manually (https://alvinalexander.com
+/gimp/gimp-how-to-create-draw-circle-in-gimp-tutorial) (I use this method
+sometimes because I can change the preview size/zoom, and Gfig is annoying
+with this sometimes - try a smaller document w/ nothing in it if you want to
+use Gfig, then move it to the larger one).
+
+Grow/shrink selection (e.g. to make concentric circles or a specific border
+color) (https://unix.stackexchange.com/questions/270534/making-concentric-
+circles-in-gimp) using Select>Shrink.../Grow... The selection sticks when you
+create a new layer.
+
+Creating custom shapes video (https://www.youtube.com
+/watch?v=X4IjrPS1ISE)
+
+==== GIMP's planned features ====
+* Nondestructive editing (https://www.reddit.com/r/linux/comments/3ulnmm
+/gimp_gimp_292_released_and_nondestructive_editing/) is planned for 3.2.
+Viewing/changing filter properties on layers
+(https://graphicdesign.stackexchange.com/questions/46152/how-can-i-view-
+applied-filters-in-gimp) is planned for the 3.x series.
+* 3.0 is being heavily worked on in 2019 and expected to be released after the 2.99.2 beta. It's another GTK3 overhaul! (https://www.gimp.org/news/2019/01/02/gimp-and-gegl-in-2018/)
+
