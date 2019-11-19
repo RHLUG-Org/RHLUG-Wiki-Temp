@@ -1,0 +1,61 @@
+You can easily set up a printer '''on Rose-Hulman's campus''' by finding it's hostname. To find a list of all the hostnames you can go to the url [https://web.rose-hulman.edu/sites/test-eit-3/Services/Pages/Printers.aspx here] and scrolling down to the table of printers. '''You need to be connected to the eduroam Wi-Fi network to print.'''
+
+You will need the <code>cups</code> package to interface with printers, or similar. On campus, all of the printers are HP printers. You should install the <code>hplip</code> driver as a package on your system.
+
+To check this, in Ubuntu/Debian-based distributions with the apt package manager, type <code>sudo apt-get install cups</code>. This will install cups on your system.
+
+In Arch Linux based distributions (Manjaro, Antergos, Parabola, etc.), type <code>sudo pacman -S cups</code>.
+
+Similarly, with <code>hplip</code>, do the same thing, except replace "cups" with "hplip" in both examples.
+
+= Adding a Printer =
+These tutorials assume you have cups already installed on your system.
+
+== Via the command line ==
+You need to have the <code>system-config-printer</code> package already installed on your Linux system.
+
+To add a printer, go to the terminal and run the command
+
+<code> sudo system-config-printer </code>
+
+This will prompt you for your password which you should type then press enter.
+
+It will bring up a printer menu that shows all available printers. To add a printer, click the + Add button in the upper left hand corner.
+
+The default option will be to add a printer by the URI which is basically a link to the printer. The URI will be something like this:
+
+<code> socket://PRINTER_HOSTNAME.printer.rose-hulman.edu </code>
+
+All printer hostnames can be found on [https://servicedesk.rose-hulman.edu/link/portal/710/4769/Article/424/How-do-I-add-printers-in-Ubuntu-Linux Rose-Hulman's EIT knowledgebase]. Pick the location you want to print from.
+
+For example, for Olin-257, the hostname is "o257-ps" meaning the URI would be <code> socket://o257-ps.printer.rose-hulman.edu </code>.
+
+So type that value into the uri field and press "Forward".
+
+Next you have to pick the printer driver. All printers on Rose-Hulman's campus are HP so pick HP and press "Forward".
+
+Next pick the model for the printer. This information can also be found in the link where hostnames are found. The 9040dn is under the driver name "LaserJet 9040dn".
+
+When you find the appropriate driver, press "Forward". This will bring you to the Installable Options. The defaults are usually fine so press "Forward" again.
+
+Next you can give the printer a Printer Name, Description, and Location. These values are just to make it easy to remember which printer is which. Choose values and press "apply"
+
+Now in the menu you should see the printer was added. You can right click on the printer, choose "Properties" and then press "Print Test Page" to print a test page. This will verify if the printer is correctly configured.
+
+Now you can print from any application as normal.
+
+== KDE ==
+
+Click on the Application Launcher in the bottom-left panel. Type "system settings" and click on the "System Settings" item. You can also go to the "Computer" tab > System Settings.
+
+In KDE Plasma 5.11 and newer, the settings are arranged on the left panel. In older KDE Plasma versions, the settings are arranged in a grid.
+
+In either case, scroll down to Hardware section > Printers. Click on "Add Printer". A "Select a Printer to Add" dialog box should come up. Click on "Manual URI" and type in the printer hostname.
+
+All printer hostnames can be found on [https://servicedesk.rose-hulman.edu/link/portal/710/4769/Article/424/How-do-I-add-printers-in-Ubuntu-Linux Rose-Hulman's EIT knowledgebase]. Pick the location you want to print from.
+
+For example, for Olin-257, the hostname is "o257-ps" meaning the URI would be <code> socket://o257-ps.printer.rose-hulman.edu </code>. Type that into the "Connection" box.
+
+Click "Next". In "Pick a Driver", click on the driver matching the printer model and name. See the EIT knowledgebase link above for details. If there are multiple drivers, you should choose the (recommended) version, and (en) version if it is listed. If you see "requires proprietary plugin" in one of the listings, you can install that driver, unless you prefer not to install it.
+
+Click "Next". You can give a name and description to the printer if you want to, or disable sharing. Click "Finish" to finish setup. You can print a test page by clicking on the printer name > "Maintenance" > "Print Test Page" to see if the configuration works properly.
