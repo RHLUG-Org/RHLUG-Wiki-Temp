@@ -1,0 +1,142 @@
+Xilinx ISE is a piece of software that allows for hardware/system schematic design. As far as I know, it is used in the CSSE132 (Intro to Computer Systems) and CSSE232 (Computer Architecture I) classes. This is a page meant to help supplement the use and installation of it on Linux platforms (to speed up the process).
+
+= Step-by-Step Install Instructions =
+
+Instructions written for version 14.7 (you can follow a similar process for other versions):
+
+See these pages for more details on installation:
+
+https://www.rose-hulman.edu/class/csse/csse132/1718c/labs/prelab01.html (CSSE132 prelab 1 - setting up Xilinx ISE)
+
+https://www.rose-hulman.edu/Class/csse/csse232/Lab0%20Course%20tools/ (CSSE232 prelab 0 - setting up Xilinx ISE, '''see sections 0 and 1 for specific instructions''')
+
+== Step 1: Downloading the Required Files from SFTP ==
+
+In order to install Xilinx ISE, you must download the installer from the rose-hulman DFS ([[Accessing DFS]] may be helpful to you); a distributed file system that rose-hulman uses to store software.
+
+We will be using the "sftp" utility to download from the dfs server. This is a command line utility. 
+
+Type the following command into a terminal and press enter. Substitute ROSE-USERNAME with your username.
+
+<code>sftp -o "HostKeyAlgorithms ssh-dss" ROSE-USERNAME@dfs.rose-hulman.edu</code>
+
+When you press enter this will ask you for your rose-hulman password which you should type in then you will get access to the dfs.
+
+You can use "cd" to move around the virtual file system, "ls" to see what files are available in the current directory, "pwd" to see which directory you're in, and "get" to download a file from the sftp server.
+
+To get to the folder to install the ISE, type the following command into sftp and press enter.
+
+<code> cd DFSRoot/AcademicAffairs/CSSE/Xilinx/14.7 </code>
+
+This will bring you to the directory that has the install folder.
+Use ls to see the files in the directory
+
+<code> ls </code>
+
+Use the get command to download the ISE installer onto your computer into the /tmp directory. '''WARNING: THIS WILL TAKE around 1-2 hours (sometimes more!) depending on the speed of your SFTP connection. Don't disconnect while this happens.'''
+
+<code> get Xilinx_ISE_DS_Lin_14.7_1015_1.tar /tmp </code>
+
+Now you will find the ISE installer in the /tmp directory.
+
+Unzip the folder by going to /tmp and typing tar xf Xilinx_ISE_DS_Lin_14.7_1015_1.tar.
+
+Now go inside the extracted Xilinx_ISE_DS_Lin_14.7_1015_1 directory by typing <code>cd Xilinx_ISE_DS_Lin_14.7_1015_1</code>.
+
+== Step 2: Running xsetup ==
+
+By default the installer script (called "xsetup") will have read and write privileges but not execute privileges. You can verify this by running <code>ls -l</code> on the file itself:
+
+<code> ls -l /tmp/Xilinx_ISE_DS_Lin_14.7_1015_1/xsetup </code>
+
+which will show
+
+<code> -rw-rw-r--. 1 USERNAME USERNAME 1232147282 DATE /tmp/Xilinx_ISE_DS_Lin_14.7_1015_1/xsetup </code>
+
+the <code>-rw-rw-r--.</code> indicates that there are read and write privileges for the user and the group and read privileges for all other users.
+
+We will use the "chmod" command to change this file permission to be executable. We use "+x" to indicate to add executable permissions. 
+
+<code> chmod +x /tmp/Xilinx_ISE_DS_Lin_14.7_1015_1/xsetup </code>
+
+The output of this command is (may not show output on all platforms by default, you can check using -v before +x in the chmod command)
+
+<code> mode of 'xsetup' changed from 0664 (rw-rw-r--) to 0755 (rwxr-xr-x) </code>
+
+which indicates that the file has been given execute access.
+
+Now to run the installer you can type in the command line (run the installer '''as the ROOT user to create directories'''):
+
+<code>sudo ./tmp/Xilinx_ISE_DS_Lin_14.7_1015_1/xsetup </code>
+
+If you get the error "could not create destination path /opt/xilinx/13.4/ise_ds" or similar upon installation, you forgot to run the installer as the root user. Exit out of it and try again. Remember to use sudo or run su root before running the command to switch to the root user for now (so you won't have to reenter your password if you get other errors.
+
+If you get the error "error while loading shared libraries: libncurses.so.5", see [[#Arch Linux Libncurses error]] and apply the fix, then continue on with the installation.
+
+== Step 3: Tips on Navigating the Installer ==
+
+From here a graphical UI will appear and you can follow those instructions to install ISE.
+
+The [[#ArchWiki page]] says that installing cable drivers causes issues with the installation. 
+
+They are required in CSSE232 to connect to the Spartan 3E board. You can install them after you complete the wizard, see [[#Installing Cable Drivers]] for how to do this.
+
+If you want, for privacy, you can disable Webtalk sending IP addresses in the installer. You must accept their EULA to install the software though  (it may be used in the future by a class, so you might want to consider leaving it installed anyway. Disabling won't uninstall webtalk.). If you want to disable it, see here for instructions: https://forums.xilinx.com/t5/Installation-and-Licensing/How-to-disable-webtalk/td-p/697077 and https://www.xilinx.com/support/answers/64657.html
+
+== Step 4: Adding the License Files and Creating an ISE Shortcut ==
+
+In .envrc (you would pick the particular file for your login shell, for example, .bashrc for the Bash shell, which comes preinstalled on most Linux distros, or whatever shell you have set, .zshrc for zsh), add the following environment variable before running ISE to install the license: set "XILINXD_LICENSE_FILE" to "2100@ise.csse.rose-hulman.edu". In other words, you want to add the following line: <code>export XILINXD_LICENSE_FILE="2100@ise.csse.rose-hulman.edu" </code> at the bottom of .bashrc or similar (this syntax is a little bit different if you're using zsh). If you want to add more lines to the end of your .bashrc (.envrc) file, add a semicolon after the end of the line to make sure there are no issues with tabs/newlines.  (Sources: https://www.rose-hulman.edu/Class/csse/csse232/Lab0%20Course%20tools/, section 1; https://askubuntu.com/questions/58814/how-do-i-add-environment-variables#58828)
+
+This means that you have to be on the campus network to access the Xilinx license server on Linux (to use Rose-Hulman's license). You can do this by connecting to the eduroam network on campus or by setting up and using an [[VPN|OpenVPN connection to the campus network]] when off campus.
+
+You might want to also add the following line to make it easier to run Xilinx commands without having to type the command every time in the terminal.
+In .bashrc (or similar), after the "XILINXD_LICENSE_FILE" line, add (for 64 bit systems, use 64, for 32 bit, use 32, etc.):
+<code>source /opt/Xilinx/14.7/ISE_DS/settings64.sh</code> (NOTE the capital X in Xilinx!) (you may want to include semicolon if you want to include more lines afterwards.)
+
+Now restart your terminal. If you get an error like "settings64.sh not found" when starting a terminal session, you may have typed in the wrong filename.
+
+To run ISE, type "ise" in the terminal (root user not required to run ISE). If you have an alias you want to bind that is called "ise" or similar in your .bashrc, just comment out that line using # before source.
+
+== Step 5 (Optional): Interfacing with Xilinx Software - Other Commands from settings64.sh ==
+
+'''*** I highly recommend bookmarking this link''' Here is a helpful command line reference of how to run Xilinx software from the command line when you have entered these lines into your .bashrc file: https://forums.xilinx.com/t5/Installation-and-Licensing/Running-ISE-in-Linux/td-p/97398
+
+= Installing Cable Drivers =
+(Updated 11/18/19)
+
+This is required if you are taking CSSE232 (because the Spartan 3E Starter Kit requires the cable drivers). You can only do this after installation.
+
+SECURITY WARNING: The following tutorial will build packages as the root user, which is dangerous.
+Currently, this is the only way that I've tested and seen working.
+If you want to avoid doing this as the main user, you might want to use a VM and allow pass through of USB devices.
+
+Follow the instructions here (the version is '''14.7'''): https://wiki.archlinux.org/index.php/Xilinx_ISE_WebPACK#Xilinx_Platform_Cable_USB-JTAG_Drivers
+
+= Uninstalling =
+(Updated 11/18/19)
+
+To uninstall Xilinx ISE, go to the '''directory where the main Xilinx files are located'''/.xinstall/bin/lin64
+
+(e.g., <code>cd /opt/Xilinx/14.7/ISE_DS/.xinstall/bin/lin64/</code>)
+
+and run the following:
+
+<code>sudo ./xsetup -Uninstall</code>
+
+You will need to reinstall again to run the "ise" command to rurn ISE. If you don't have the xsetup install script, download it again from the DFS (see [[#Step 1: Downloading the Required Files from SFTP]]). You will also see "file not found" (source [...]/settings64.sh) when you enter the terminal. To fix this comment out the source line in the .bashrc file using # next to it. The other command (license environment variable) will work fine in the .bashrc but you can comment it out if you want.
+
+Source: https://www.xilinx.com/support/answers/35527.html
+
+= Troubleshooting =
+=== Arch Linux Libncurses error ===
+(3/5/18, Xilinx ISE 14.7) If you get the error "error while loading shared libraries: libncurses.so.5", this is a common Arch Linux error on many software packages (including Arduino/Arduino USB for me at times), and can be solved by installing ncurses5-compat-libs from the AUR (https://aur.archlinux.org/packages/ncurses5-compat-libs/).
+
+'''NOTE: This happened for me when uninstalling, and I had to use this fix.'''
+
+If you get a PGP key error while installing , enter the command "gpg --recv-keys <KEYID - See 'validpgpkeys' array in PKGBUILD>" (no root needed), where <KEYID - See 'validpgpkeys' array in PKGBUILD> can be found by clicking view PKGBUILD at the above AUR link. and navigating to "validpgpkeys=(' [...] ')". Install each PGP key (there is only one needed as of 3/5/18). This error may be fixed in future versions, but this is good to keep in mind for any installation.
+
+=== Reference: ArchWiki page ===
+
+Here's the ArchWiki page with similar instructions. The WebPACK is basically the free version of the software. We are using the licensed version, but the installation for both versions have a very similar procedure: https://wiki.archlinux.org/index.php/Xilinx_ISE_WebPACK
+
+I have not tried installing the xilinx-ise package from the AUR, but in the comments there are issues of the license manager not appearing after installation. If this happens, try installing Xilinx the manual way (using this guide and downloading/installing directly from the SFTP server).
