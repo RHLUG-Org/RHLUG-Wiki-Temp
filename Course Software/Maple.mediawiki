@@ -1,0 +1,57 @@
+In order to install Maple you must download the installer from the rose-hulman DFS; a distributed file system that rose-hulman uses to store software.
+
+We will be using the "sftp" utility to download from the dfs server. This is a command line utility. 
+
+Type the following command into a terminal and press enter. Substitute ROSE-USERNAME with your username.
+
+<code>sftp -o "HostKeyAlgorithms ssh-dss" ROSE-USERNAME@dfs.rose-hulman.edu</code>
+
+When you press enter this will ask you for your rose-hulman password which you should type in then you will get access to the dfs.
+
+You can use "cd" to move around the virtual file system, "ls" to see what files are available in the current directory, "pwd" to see which directory you're in, and "get" to download a file from the sftp server.
+
+To get to the folder to install Maple, type the following command into sftp and press enter.
+
+<code> cd DFSRoot/Software/Linux_MacOSX_Apps/Maple/Maple\ 2017/ </code>
+
+This will bring you to the directory that has the Maple install.
+Use ls to see the files in the directory
+
+<code> ls </code>
+
+Use the get command to download the Maple installer onto your computer into the /tmp directory.
+
+<code> get Maple2017.0LinuxX64Installer.run /tmp </code>
+
+Now you will find the maple installer in the /tmp directory.
+
+By default the installer file will have read and write privileges but not execute privileges. You can verify this by running <code>ls -l</code> on the file itself:
+
+<code> ls -l /tmp/Maple2017.0LinuxX64Installer.run </code>
+
+which will show
+
+<code> -rw-rw-r--. 1 USERNAME USERNAME 1232147282 DATE /tmp/Maple2017.0LinuxX64Installer.run </code>
+
+the <code>-rw-rw-r--.</code> indicates that there are read and write privileges for the user and the group and read privilages for all other users.
+
+We will use the "chmod" command to change this file permission to be executable. We use "+x" to indicate to add executable permissions. 
+
+<code> chmod +x /tmp/Maple2017.0LinuxX64Installer.run </code>
+
+The output of this command is 
+
+<code> mode of 'Maple2017.0LinuxX64Installer.run' changed from 0664 (rw-rw-r--) to 0775 (rwxrwxr-x) </code>
+
+which indicates that the file has been given execute access.
+
+Now to run the installer you can type in the command line
+
+<code> /tmp/Maple2017.0LinuxX64Installer.run </code>
+
+From here a graphical UI will appear and you can follow those instructions to install Maple.
+
+You have to use the network install rather than the stand alone. The license server is <code>maplelm-hv.rose-hulman.edu</code> (tested in 9/2019) and use the default port (usually 27000). (Source: https://www.maplesoft.com/documentation_center/maple2017/Maple2017.pdf, https://www.reddit.com/r/rosehulman/comments/4hm1vb/maple_on_linux/).
+
+This means that you have to be on the campus network to access the Maple license server on Linux (to use Rose-Hulman's license of Maple). You can do this by connecting to the eduroam network on campus or by using the '''Pulse Secure VPN''' when off campus (please see that page under the '''Accessing Campus Resources''' folder for how to do that).
+ 
